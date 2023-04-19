@@ -15,42 +15,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotelManagement.entity.StaffMember;
-import com.hotelManagement.service.StaffMemberService;
+import com.hotelManagement.entity.RoomType;
 import com.hotelManagement.exception.ResourceAlreadyExistsException;
 import com.hotelManagement.exception.ResourceNotFoundException;
+import com.hotelManagement.service.RoomTypeService;
 
 @RestController
-@RequestMapping(value = "/staff-member")
-public class StaffMemberController {
-
+@RequestMapping(value="/room-type")
+public class RoomTypeController {
+	
 	@Autowired
-	private StaffMemberService service;
-
+	private RoomTypeService service;
+	
 	@PostMapping(value = "/save")
-	public ResponseEntity<Boolean> saveStaff(@RequestBody StaffMember member) {
-		boolean isAdded = service.saveStaff(member);
+	public ResponseEntity<Boolean> saveRoomType(@RequestBody RoomType type) {
+		boolean isAdded = service.saveRoomType(type);
 		if (isAdded) {
 			return new ResponseEntity<Boolean>(isAdded, HttpStatus.CREATED);
 		} else {
 			throw new ResourceAlreadyExistsException("Resource Already Exists!");
 		}
 	}
+	
+	@GetMapping(value = "/get-roomType-by-id/{roomTypeId}")
+	public ResponseEntity<RoomType> getRoomTypeById(@PathVariable long roomTypeId) {
 
-	@GetMapping(value = "/get-staffMember-by-id/{staffMemberId}")
-	public ResponseEntity<StaffMember> getStaffById(@PathVariable long staffMemberId) {
-
-		StaffMember staffMember = service.getStaffById(staffMemberId);
-		if (staffMember != null) {
-			return new ResponseEntity<StaffMember>(staffMember, HttpStatus.OK);
+		RoomType roomType = service.getRoomTypeById(roomTypeId);
+		if (roomType != null) {
+			return new ResponseEntity<RoomType>(roomType, HttpStatus.OK);
 		} else {
 			throw new ResourceNotFoundException("Resource not found!");
 		}
 	}
 
 	@DeleteMapping(value = "/delete")
-	public ResponseEntity<Boolean> deleteStaffMember(@RequestParam long staffMemberId) {
-		boolean isDeleted = service.deleteStaffMember(staffMemberId);
+	public ResponseEntity<Boolean> deleteRoomType(@RequestParam long roomTypeId) {
+		boolean isDeleted = service.deleteRoomType(roomTypeId);
 		if (isDeleted) {
 			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 		} else {
@@ -58,24 +58,13 @@ public class StaffMemberController {
 		}
 	}
 
-	@PutMapping(value = "/update")
-	public ResponseEntity<Boolean> updateStaff(@RequestBody StaffMember staffMember) {
-		boolean isUpdated = service.updateStaff(staffMember);
-		if (isUpdated) {
-			return new ResponseEntity<Boolean>(isUpdated, HttpStatus.OK);
-		} else {
-			throw new ResourceNotFoundException("Resource not found!");
-		}
-	}
-
 	@GetMapping(value = "/get-all")
-	public ResponseEntity<List<StaffMember>> getAllStaff() {
-		List<StaffMember> staffMembers = service.getAllStaff();
-		if (staffMembers.isEmpty()) {
-			return new ResponseEntity<List<StaffMember>>(staffMembers, HttpStatus.NO_CONTENT);
+	public ResponseEntity<List<RoomType>> getAllRoomType() {
+		List<RoomType> roomTypes = service.getAllRoomType();
+		if (roomTypes.isEmpty()) {
+			return new ResponseEntity<List<RoomType>>(roomTypes, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<List<StaffMember>>(staffMembers, HttpStatus.OK);
+			return new ResponseEntity<List<RoomType>>(roomTypes, HttpStatus.OK);
 		}
 	}
-
 }
