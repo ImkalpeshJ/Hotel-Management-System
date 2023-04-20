@@ -73,9 +73,9 @@ public class RoomTypeDaoImpl implements RoomTypeDao {
 			session = factory.openSession();
 			Transaction transaction = session.beginTransaction();
 
-			RoomType product = session.get(RoomType.class, roomTypeId);
-			if (product != null) {
-				session.delete(product);
+			RoomType roomType = session.get(RoomType.class, roomTypeId);
+			if (roomType != null) {
+				session.delete(roomType);
 				transaction.commit();
 				isDeleted = true;
 			}
