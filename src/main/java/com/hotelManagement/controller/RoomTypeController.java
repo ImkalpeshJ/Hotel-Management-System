@@ -67,4 +67,5 @@ public class RoomTypeController {
 			return new ResponseEntity<List<RoomType>>(roomTypes, HttpStatus.OK);
 		}
 	}
+	
 }

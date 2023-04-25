@@ -67,4 +67,14 @@ public class RoomController {
 			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping(value="/get-available-rooms")
+	public ResponseEntity<List<Room>> getAvailableRooms(){
+		List<Room> rooms = service.getAvailableRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
 }

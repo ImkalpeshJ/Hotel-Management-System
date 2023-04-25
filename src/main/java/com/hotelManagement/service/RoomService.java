@@ -14,5 +14,7 @@ public interface RoomService {
 
 	List<Room> getAllRoom();
 
+	List<Room> getAvailableRooms();
+
 
 }
