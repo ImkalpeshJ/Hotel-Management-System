@@ -1,4 +1,4 @@
-package com.hotelManagement.service;
+package com.hotelManagement.serviceIMPL;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hotelManagement.dao.RoomTypeDao;
 import com.hotelManagement.entity.RoomType;
+import com.hotelManagement.service.RoomTypeService;
 
 @Service
 public class RoomTypeServiceImpl implements RoomTypeService{

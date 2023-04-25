@@ -8,14 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotelManagement.entity.Customer;
 import com.hotelManagement.exception.ResourceAlreadyExistsException;
 import com.hotelManagement.exception.ResourceNotFoundException;
 import com.hotelManagement.model.Billing;
+import com.hotelManagement.model.FoodBill;
 import com.hotelManagement.service.CustomerService;
 
 @RestController
@@ -25,9 +28,9 @@ public class CustomerController {
 	@Autowired
 	CustomerService service;
 	
-	@PostMapping(value = "/save")
-	public ResponseEntity<Boolean> saveCustomer(@RequestBody Customer customer) {
-		boolean isAdded = service.saveCustomer(customer);
+	@PostMapping(value = "/check-in")
+	public ResponseEntity<Boolean> checkIn(@RequestBody Customer customer) {
+		boolean isAdded = service.checkIn(customer);
 		if (isAdded) {
 			return new ResponseEntity<Boolean>(isAdded, HttpStatus.CREATED);
 		} else {
@@ -35,8 +38,18 @@ public class CustomerController {
 		}
 	}
 	
+	@PutMapping(value = "/check-out")
+	public ResponseEntity<Boolean> checkOut(@RequestParam long id) {
+		boolean isUpdated = service.checkOut(id);
+		if (isUpdated) {
+			return new ResponseEntity<Boolean>(isUpdated, HttpStatus.OK);
+		} else {
+			throw new ResourceNotFoundException("Resource not found!");
+		}
+	}
+	
 	@GetMapping(value = "/get-customer-by-id/{id}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable long id) {
+	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
 
 		Customer customer = service.getCustomerById(id);
 		if (customer != null) {
@@ -46,9 +59,9 @@ public class CustomerController {
 		}
 	}
 	
-	@GetMapping(value = "/get-final/{customerId}")
-	public ResponseEntity<Billing> getFinalBill(@PathVariable Long id) {
-		Billing billing = service.getFinalBill(id);
+	@GetMapping(value = "/get-final-bill/{customerId}")
+	public ResponseEntity<Billing> getFinalBill(@PathVariable Long customerId) {
+		Billing billing = service.getFinalBill(customerId);
 		if (!(billing == null)) {
 			return new ResponseEntity<Billing>(billing, HttpStatus.OK);
 		} else {
@@ -58,8 +71,8 @@ public class CustomerController {
 	}
 	
 	@GetMapping(value="/get-food-bill")
-	public ResponseEntity<Double> getFoodBill(@RequestBody List<Long> list){
-		double foodBill = (Double)service.getFoodBill(list);
-		return new ResponseEntity<Double>(foodBill, HttpStatus.OK);
+	public ResponseEntity<FoodBill> getFoodBill(@RequestBody List<Long> list){
+		FoodBill foodBill = service.getFoodBill(list);
+		return new ResponseEntity<FoodBill>(foodBill, HttpStatus.OK);
 	}
 }

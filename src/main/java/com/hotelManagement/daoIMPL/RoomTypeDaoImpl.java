@@ -1,4 +1,4 @@
-package com.hotelManagement.dao;
+package com.hotelManagement.daoIMPL;
 
 import java.util.List;
 
@@ -11,22 +11,23 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hotelManagement.entity.StaffMember;
+import com.hotelManagement.dao.RoomTypeDao;
+import com.hotelManagement.entity.RoomType;
 
 @Repository
-public class StaffMemberDaoImpl implements StaffMemberDao{
+public class RoomTypeDaoImpl implements RoomTypeDao {
 
 	@Autowired
 	SessionFactory factory;
 	
 	@Override
-	public boolean saveStaff(StaffMember staffMember) {
+	public boolean saveRoomType(RoomType type) {
 		boolean isAdded = false;
 		Session session = null;
 		try {
 			session = factory.openSession();
 			Transaction transaction = session.beginTransaction();
-			session.save(staffMember);
+			session.save(type);
 			transaction.commit();
 			isAdded = true;
 		} catch (PersistenceException e) {
@@ -45,13 +46,13 @@ public class StaffMemberDaoImpl implements StaffMemberDao{
 	}
 
 	@Override
-	public StaffMember getStaffById(long id) {
-		StaffMember staffMember = null;
+	public RoomType getRoomTypeById(long roomTypeId) {
+		RoomType roomType = null;
 		Session session = null;
 		try {
 			session = factory.openSession();
 
-			staffMember = session.get(StaffMember.class, id);
+			roomType = session.get(RoomType.class, roomTypeId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,63 +62,21 @@ public class StaffMemberDaoImpl implements StaffMemberDao{
 			}
 		}
 
-		return staffMember;
+		return roomType;
 	}
 	
 
 	@Override
-	public boolean updateStaff(StaffMember staffMember) {
-		Session session = null;
-		boolean isUpdated = false;
-		try {
-			session = factory.openSession();
-			Transaction transaction = session.beginTransaction();
-			StaffMember dbStaffMember = getStaffById(staffMember.getId());
-			if (dbStaffMember != null) {
-				session.update(staffMember);
-				transaction.commit();
-				isUpdated = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return isUpdated;
-	}
-
-	@Override
-	public List<StaffMember> getAllStaff() {
-		Session session = null;
-		List<StaffMember> list = null;
-		try {
-			session = factory.openSession();
-			Criteria criteria = session.createCriteria(StaffMember.class);
-			list = criteria.list();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public boolean deleteStaffMember(long id) {
+	public boolean deleteRoomType(long roomTypeId) {
 		Session session = null;
 		boolean isDeleted = false;
 		try {
 			session = factory.openSession();
 			Transaction transaction = session.beginTransaction();
 
-			StaffMember product = session.get(StaffMember.class, id);
-			if (product != null) {
-				session.delete(product);
+			RoomType roomType = session.get(RoomType.class, roomTypeId);
+			if (roomType != null) {
+				session.delete(roomType);
 				transaction.commit();
 				isDeleted = true;
 			}
@@ -131,6 +90,25 @@ public class StaffMemberDaoImpl implements StaffMemberDao{
 		}
 
 		return isDeleted;
+	}
+
+	@Override
+	public List<RoomType> getAllRoomType() {
+		Session session = null;
+		List<RoomType> list = null;
+		try {
+			session = factory.openSession();
+			Criteria criteria = session.createCriteria(RoomType.class);
+			list = criteria.list();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
 	}
 
 }

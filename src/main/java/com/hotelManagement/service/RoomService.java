@@ -16,5 +16,15 @@ public interface RoomService {
 
 	List<Room> getAvailableRooms();
 
+	List<Room> getAvailableACRooms();
+
+	List<Room> getAvailableNonACRooms();
+
+	List<Room> getAvailableNormalRooms();
+
+	List<Room> getAvailableDeluxeRooms();
+
+	List<Room> getOccupiedRooms();
+
 
 }

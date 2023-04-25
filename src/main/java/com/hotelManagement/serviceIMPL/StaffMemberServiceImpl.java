@@ -1,4 +1,4 @@
-package com.hotelManagement.service;
+package com.hotelManagement.serviceIMPL;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hotelManagement.dao.StaffMemberDao;
 import com.hotelManagement.entity.StaffMember;
+import com.hotelManagement.service.StaffMemberService;
 
 @Service
 public class StaffMemberServiceImpl implements StaffMemberService {

@@ -27,7 +27,7 @@ public class RoomTypeController {
 	@Autowired
 	private RoomTypeService service;
 	
-	@PostMapping(value = "/save")
+	@PostMapping(value = "/save-room-type")
 	public ResponseEntity<Boolean> saveRoomType(@RequestBody RoomType type) {
 		boolean isAdded = service.saveRoomType(type);
 		if (isAdded) {
@@ -48,7 +48,7 @@ public class RoomTypeController {
 		}
 	}
 
-	@DeleteMapping(value = "/delete")
+	@DeleteMapping(value = "/delete-room-type")
 	public ResponseEntity<Boolean> deleteRoomType(@RequestParam long roomTypeId) {
 		boolean isDeleted = service.deleteRoomType(roomTypeId);
 		if (isDeleted) {
@@ -58,7 +58,7 @@ public class RoomTypeController {
 		}
 	}
 
-	@GetMapping(value = "/get-all")
+	@GetMapping(value = "/get-all-room-type")
 	public ResponseEntity<List<RoomType>> getAllRoomType() {
 		List<RoomType> roomTypes = service.getAllRoomType();
 		if (roomTypes.isEmpty()) {

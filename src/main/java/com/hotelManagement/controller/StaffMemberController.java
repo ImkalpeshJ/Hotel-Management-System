@@ -27,7 +27,7 @@ public class StaffMemberController {
 	@Autowired
 	private StaffMemberService service;
 
-	@PostMapping(value = "/save")
+	@PostMapping(value = "/new-staff")
 	public ResponseEntity<Boolean> saveStaff(@RequestBody StaffMember member) {
 		boolean isAdded = service.saveStaff(member);
 		if (isAdded) {
@@ -48,7 +48,7 @@ public class StaffMemberController {
 		}
 	}
 
-	@DeleteMapping(value = "/delete")
+	@DeleteMapping(value = "/delete-staff-member")
 	public ResponseEntity<Boolean> deleteStaffMember(@RequestParam long staffMemberId) {
 		boolean isDeleted = service.deleteStaffMember(staffMemberId);
 		if (isDeleted) {
@@ -58,7 +58,7 @@ public class StaffMemberController {
 		}
 	}
 
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/update-staff-member")
 	public ResponseEntity<Boolean> updateStaff(@RequestBody StaffMember staffMember) {
 		boolean isUpdated = service.updateStaff(staffMember);
 		if (isUpdated) {
@@ -68,7 +68,7 @@ public class StaffMemberController {
 		}
 	}
 
-	@GetMapping(value = "/get-all")
+	@GetMapping(value = "/get-all-staff-members")
 	public ResponseEntity<List<StaffMember>> getAllStaff() {
 		List<StaffMember> staffMembers = service.getAllStaff();
 		if (staffMembers.isEmpty()) {

@@ -4,15 +4,18 @@ import java.util.List;
 
 import com.hotelManagement.entity.Customer;
 import com.hotelManagement.model.Billing;
+import com.hotelManagement.model.FoodBill;
 
 public interface CustomerService {
 
-	boolean saveCustomer(Customer customer);
+	boolean checkIn(Customer customer);
 
-	Billing getFinalBill(Long id);
+	Billing getFinalBill(long id);
 
 	Customer getCustomerById(long id);
 
-	double getFoodBill(List<Long> list);
+	FoodBill getFoodBill(List<Long> list);
+
+	boolean checkOut(long id);
 
 }

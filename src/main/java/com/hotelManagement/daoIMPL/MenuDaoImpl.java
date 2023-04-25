@@ -1,4 +1,4 @@
-package com.hotelManagement.dao;
+package com.hotelManagement.daoIMPL;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hotelManagement.dao.MenuDao;
 import com.hotelManagement.entity.Menu;
 
 @Repository

@@ -1,38 +1,46 @@
 package com.hotelManagement.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Customer {
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
-	
+
 	@OneToOne
 	private Room room;
-	
+
 	@OneToOne
 	private StaffMember member;
-	
+
 	private String status;
-	
+
+	@Column(nullable = true)
+	private String orderedFood;
+
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(Long id, String name, Room room, StaffMember member, String status) {
+	public Customer(Long id, String name, Room room, StaffMember member, String status, String orderedFood) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.room = room;
 		this.member = member;
 		this.status = status;
+		this.orderedFood = orderedFood;
 	}
 
 	public Long getId() {
@@ -75,5 +83,12 @@ public class Customer {
 		this.status = status;
 	}
 
-		
+	public String getOrderedFood() {
+		return orderedFood;
+	}
+
+	public void setOrderedFood(String orderedFood) {
+		this.orderedFood = orderedFood;
+	}
+
 }

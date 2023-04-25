@@ -27,7 +27,7 @@ public class RoomController {
 	@Autowired
 	private RoomService service;
 	
-	@PostMapping(value = "/save")
+	@PostMapping(value = "/save-new-room")
 	public ResponseEntity<Boolean> saveRoom(@RequestBody Room room) {
 		boolean isAdded = service.saveRoom(room);
 		if (isAdded) {
@@ -48,7 +48,7 @@ public class RoomController {
 		}
 	}
 
-	@DeleteMapping(value = "/delete")
+	@DeleteMapping(value = "/delete-a-room")
 	public ResponseEntity<Boolean> deleteRoom(@RequestParam long roomId) {
 		boolean isDeleted = service.deleteRoom(roomId);
 		if (isDeleted) {
@@ -58,7 +58,7 @@ public class RoomController {
 		}
 	}
 
-	@GetMapping(value = "/get-all")
+	@GetMapping(value = "/get-all-rooms")
 	public ResponseEntity<List<Room>> getAllRoom() {
 		List<Room> rooms = service.getAllRoom();
 		if (rooms.isEmpty()) {
@@ -71,6 +71,56 @@ public class RoomController {
 	@GetMapping(value="/get-available-rooms")
 	public ResponseEntity<List<Room>> getAvailableRooms(){
 		List<Room> rooms = service.getAvailableRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
+	
+	@GetMapping(value="/get-occupied-rooms")
+	public ResponseEntity<List<Room>> getOccupiedRooms(){
+		List<Room> rooms = service.getOccupiedRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
+	
+	@GetMapping(value="/get-available-ac-rooms")
+	public ResponseEntity<List<Room>> getAvailableACRooms(){
+		List<Room> rooms = service.getAvailableACRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
+	
+	@GetMapping(value="/get-available-non-ac-rooms")
+	public ResponseEntity<List<Room>> getAvailableNonACRooms(){
+		List<Room> rooms = service.getAvailableNonACRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
+	
+	@GetMapping(value="/get-available-normal-rooms")
+	public ResponseEntity<List<Room>> getAvailableNormalRooms(){
+		List<Room> rooms = service.getAvailableNormalRooms();
+		if (rooms.isEmpty()) {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Room>>(rooms, HttpStatus.OK);
+		}	
+	}
+	
+	@GetMapping(value="/get-available-deluxe-rooms")
+	public ResponseEntity<List<Room>> getAvailableDeluxeRooms(){
+		List<Room> rooms = service.getAvailableDeluxeRooms();
 		if (rooms.isEmpty()) {
 			return new ResponseEntity<List<Room>>(rooms, HttpStatus.NO_CONTENT);
 		} else {

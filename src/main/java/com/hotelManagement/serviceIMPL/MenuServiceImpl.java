@@ -1,4 +1,4 @@
-package com.hotelManagement.service;
+package com.hotelManagement.serviceIMPL;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hotelManagement.dao.MenuDao;
 import com.hotelManagement.entity.Menu;
+import com.hotelManagement.service.MenuService;
 
 @Service
 public class MenuServiceImpl implements MenuService {
