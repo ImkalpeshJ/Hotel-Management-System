@@ -88,4 +88,18 @@ public class MenuServiceImpl implements MenuService {
 		return map;
 	}
 
+
+
+	@Override
+	public List<Menu> getMenu() {
+		return dao.getMenu();
+	}
+
+
+
+	@Override
+	public List<Menu> getMenuAsc() {
+		return dao.getMenuAsc();
+	}
+
 }

@@ -18,4 +18,6 @@ public interface CustomerService {
 
 	boolean checkOut(long id);
 
+	boolean addOrder(long id, String order);
+
 }

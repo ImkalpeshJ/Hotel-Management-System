@@ -8,4 +8,8 @@ public interface MenuDao {
 
 	int[] uploadSheet(List<Menu> list);
 
+	List<Menu> getMenu();
+
+	List<Menu> getMenuAsc();
+
 }

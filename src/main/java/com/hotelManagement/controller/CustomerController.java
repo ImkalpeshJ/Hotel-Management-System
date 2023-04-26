@@ -48,6 +48,16 @@ public class CustomerController {
 		}
 	}
 	
+	@PutMapping(value = "/add-food-order")
+	public ResponseEntity<Boolean> addOrder(@RequestParam long id, String order) {
+		boolean isUpdated = service.addOrder(id, order);
+		if (isUpdated) {
+			return new ResponseEntity<Boolean>(isUpdated, HttpStatus.OK);
+		} else {
+			throw new ResourceNotFoundException("Resource not found!");
+		}
+	}
+	
 	@GetMapping(value = "/get-customer-by-id/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
 

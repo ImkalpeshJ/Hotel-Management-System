@@ -76,4 +76,13 @@ public class CustomerServiceImpl implements CustomerService {
 		return isUpdated;
 	}
 
+	@Override
+	public boolean addOrder(long id, String order) {
+		boolean isUpdated = false;
+		Customer customer = dao.getCustomerById(id);
+		customer.setOrderedFood(customer.getOrderedFood().concat(order));
+		isUpdated = dao.checkOut(customer);
+		return isUpdated;
+	}
+
 }

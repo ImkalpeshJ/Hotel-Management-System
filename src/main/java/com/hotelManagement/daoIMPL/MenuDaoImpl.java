@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,44 @@ public class MenuDaoImpl implements MenuDao{
 			arr[1]=excludedCount;
 		}
 		return arr;
+	}
+
+	@Override
+	public List<Menu> getMenu() {
+		Session session = null;
+		List<Menu> list = null;
+		try {
+			session = sf.openSession();
+			Criteria criteria = session.createCriteria(Menu.class);
+			list = criteria.list();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Menu> getMenuAsc() {
+		Session session = null;
+		List<Menu> list = null;
+		try {
+			session = sf.openSession();
+			Criteria criteria = session.createCriteria(Menu.class);
+			criteria.addOrder(Order.asc("price"));
+			list = criteria.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
 	}
 
 }
